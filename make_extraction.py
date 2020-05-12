@@ -166,8 +166,11 @@ def process(split, k):
     data_dir = join(DATA_DIR, split)
     ext_sentences = []
     # print("reached_1")
-    with open(join(data_dir, 'annual_reports/{}.txt'.format(k)),encoding='utf8') as f:
-        ext_data = f.read()
+    try:
+        with open(join(data_dir, 'annual_reports/{}.txt'.format(k)),encoding='utf8') as f:
+            ext_data = f.read()
+    except:
+        return
     # print("reached_2")
     for sent in tokenizer.tokenize(ext_data):
         sent = sent.replace('\n', ' ')
@@ -181,9 +184,13 @@ def process(split, k):
         if files[i].startswith(k):
             res = {}
             print(files[i])
+
             abs_sentences = []
-            with open(join(data_dir, 'gold_summaries/{}'.format(files[i])),encoding='utf8') as f:
-                abs_data = f.read()
+            try:
+                with open(join(data_dir, 'gold_summaries/{}'.format(files[i])),encoding='utf8') as f:
+                    abs_data = f.read()
+            except:
+                continue
             # print("reached_3")
             for sent in tokenizer.tokenize(abs_data):
                 sent = sent.replace('\n', ' ')
