@@ -1,2 +1,2 @@
 # finsummary
-Finsummary
+Text summarizaion on financial data
